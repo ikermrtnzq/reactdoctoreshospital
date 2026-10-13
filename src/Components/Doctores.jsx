@@ -6,9 +6,9 @@ import DetalleDoctor from './DetalleDoctor';
 export default class Doctores extends Component {
 
     state = {
-        doctores :[]
+        doctores :[],
+        idDoctor: null
     }
-    idDoctor = React.createRef();
     buscarDoctores =() => {
         let url = Global.urlApiDoctores;
         let endpoint = "api/Doctores/DoctoresHospital/";
@@ -22,9 +22,11 @@ export default class Doctores extends Component {
 
     }
 
-    verDetalle = (event) => {
-        event.preventDefault();
-        console.log(this.idDoctor.current)
+    verDetalle = ( idDoctor) => {
+        console.log(idDoctor)
+        this.setState({
+            idDoctor: idDoctor
+        })
     }
 
     componentDidMount = () => {
@@ -55,19 +57,19 @@ export default class Doctores extends Component {
                     {
                         this.state.doctores.map((doctor, index) => {
                             return(
-                            <tr>
+                            <tr key={doctor.idDoctor}>
                                 <td style={{padding: "10px",border : "1px solid black"}}>Doctor {doctor.apellido}  </td>
                                 <td style={{padding: "10px",border : "1px solid black"}}> {doctor.especialidad} </td>
                                 <td style={{padding: "10px",border : "1px solid black"}}> {doctor.salario}€ </td>
-                                <td style={{padding: "10px",border : "1px solid black"}}><button ref={this.idDoctor} onClick={this.verDetalle} style={{borderRadius: "5px"}}>Ver Detalle</button></td>
+                                <td style={{padding: "10px",border : "1px solid black"}}><button onClick={()=>this.verDetalle(doctor.idDoctor)} style={{borderRadius: "5px"}}>Ver Detalle</button></td>
                             </tr>
                             )
                         })
                     }
                 </tbody>
-            </table>{
-           this.idDoctor.current != null && (<DetalleDoctor idDoctor={this.idDoctor.current}/>)
-
+            </table>
+            {
+                this.state.idDoctor != null && (<DetalleDoctor idDoctor={this.state.idDoctor}/>)
             }
         </div>
     )
