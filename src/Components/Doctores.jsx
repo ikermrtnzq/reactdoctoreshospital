@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Global from '../Global';
 import axios from 'axios';
 import DetalleDoctor from './DetalleDoctor';
+import ServiceHospitales from '../services/ServiceHospitales';
 
 export default class Doctores extends Component {
 
@@ -9,17 +10,13 @@ export default class Doctores extends Component {
         doctores :[],
         idDoctor: null
     }
+    service = new ServiceHospitales();
     buscarDoctores =() => {
-        let url = Global.urlApiDoctores;
-        let endpoint = "api/Doctores/DoctoresHospital/";
-        let id = this.props.idhospital
-        axios.get(url + endpoint + id).then((response) => {
-            //console.log(response.data)
+        this.service.getDoctoresHospital(this.props.idhospital).then(result =>{
             this.setState({
-                doctores : response.data
+                doctores : result
             })
         })
-
     }
 
     verDetalle = ( idDoctor) => {
@@ -36,7 +33,11 @@ export default class Doctores extends Component {
     componentDidUpdate = (oldProps) => {
         if(oldProps.idhospital != this.props.idhospital){
             this.buscarDoctores()
+            this.setState({
+                idDoctor: null
+            })
         }
+
     }
 
   render() {
@@ -61,13 +62,14 @@ export default class Doctores extends Component {
                                 <td style={{padding: "10px",border : "1px solid black"}}>Doctor {doctor.apellido}  </td>
                                 <td style={{padding: "10px",border : "1px solid black"}}> {doctor.especialidad} </td>
                                 <td style={{padding: "10px",border : "1px solid black"}}> {doctor.salario}€ </td>
-                                <td style={{padding: "10px",border : "1px solid black"}}><button onClick={()=>this.verDetalle(doctor.idDoctor)} style={{borderRadius: "5px"}}>Ver Detalle</button></td>
+                                <td style={{padding: "10px",border : "1px solid black"}}><button onClick={()=>this.verDetalle(doctor.idDoctor)} style={{borderRadius: "5px", backgroundColor:"blanchedalmond", border:"1px solid blanchedalmond"}}>Ver Detalle</button></td>
                             </tr>
                             )
                         })
                     }
                 </tbody>
             </table>
+            <br/>
             {
                 this.state.idDoctor != null && (<DetalleDoctor idDoctor={this.state.idDoctor}/>)
             }

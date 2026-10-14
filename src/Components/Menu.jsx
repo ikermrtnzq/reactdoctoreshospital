@@ -38,7 +38,16 @@ export default class Menu extends Component {
                     <NavLink style={{textDecoration : "none", color : "black"}} to="/">Home</NavLink>
                   </li>
                   <li className="nav-item">
+                    <NavLink style={{textDecoration : "none", color : "black"}} to="/hospitales">Hopitales</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink style={{textDecoration : "none", color : "black"}} to="/services">Services</NavLink>
+                  </li>
+                  <li className="nav-item">
                     <NavLink style={{textDecoration : "none", color : "black"}} to="/doctores/22">Doctores</NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink style={{textDecoration : "none", color : "black"}} to="/hospital">Añadir Hospital</NavLink>
                   </li>
                   <li className="nav-item dropdown">
                       <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

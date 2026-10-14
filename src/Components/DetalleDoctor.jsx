@@ -28,11 +28,11 @@ export default class DetalleDoctor extends Component {
     }
     render() {
     return (
-      <div>
-        <h1>Detalle del Doctor {this.state.doctor.apellido}</h1>
-        <h3>ID: {this.state.doctor.idDoctor}</h3>
-        <h3>Pertenece al hospital con id {this.state.doctor.idHospital}</h3>
-        <h3>Percibe un salario de {this.state.doctor.salario} €</h3>
+      <div className="list-group">
+        <h1 className="list-group-item">Detalle del Doctor {this.state.doctor.apellido}</h1>
+        <h3 className="list-group-item">ID: {this.state.doctor.idDoctor}</h3>
+        <h3 className="list-group-item">Pertenece al hospital con id {this.state.doctor.idHospital}</h3>
+        <h3 className="list-group-item">Percibe un salario de {this.state.doctor.salario} €</h3>
       </div>
     )
   }
