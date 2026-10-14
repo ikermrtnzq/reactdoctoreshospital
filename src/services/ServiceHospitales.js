@@ -33,5 +33,17 @@ export default class ServiceHospitales{
         })
     }
 
+    crearHospital(hospital){
+        return new Promise(function(resolve){
+            let url = Global.urlApiHospitales
+            let endpoint = "api/hospitales"
+
+            axios.post(url + endpoint, hospital).then((response) => {
+                console.log("insertado")
+                resolve(response)
+            })  
+        })
+    }
+
     
 }
